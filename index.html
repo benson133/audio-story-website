@@ -1,0 +1,42 @@
+<div class="book">
+  <h1>📘 第1頁：初見 3D 印表機</h1>
+  <img src="scene1.png" alt="第1頁插圖">
+  <p>小新第一次走進創客教室，看見桌上一台亮晶晶的 3D 印表機...</p>
+
+  <h1>📘 第2頁：安全檢查</h1>
+  <img src="scene2.png" alt="第2頁插圖">
+  <p>開始操作前，小新戴上護目鏡，檢查列印平台是否乾淨...</p>
+
+  <h1>📘 第3頁：開始列印</h1>
+  <img src="scene3.png" alt="第3頁插圖">
+  <p>確認設定完成後，小新按下開始鍵...</p>
+
+  <h1>📘 第4頁：小問題與解決</h1>
+  <img src="scene4.png" alt="第4頁插圖">
+  <p>突然，第一層有點翹邊，小新心裡有些緊張...</p>
+
+  <h1>📘 第5頁：成功完成</h1>
+  <img src="scene5.png" alt="第5頁插圖">
+  <p>經過一小時的努力，作品終於完成！小新拿起印出的模型...</p>
+
+  <button onclick="speakAll()">🔊 播放全篇語音</button>
+  <button onclick="stopSpeak()">⏹ 停止</button>
+</div>
+<script>
+function speakAll() {
+  let allText = `
+    小新第一次走進創客教室，看見桌上一台亮晶晶的 3D 印表機...
+    開始操作前，小新戴上護目鏡，檢查列印平台是否乾淨...
+    確認設定完成後，小新按下開始鍵...
+    突然，第一層有點翹邊，小新心裡有些緊張...
+    經過一小時的努力，作品終於完成！小新拿起印出的模型...
+  `;
+  let utterance = new SpeechSynthesisUtterance(allText);
+  utterance.lang = "zh-TW";
+  speechSynthesis.speak(utterance);
+}
+
+function stopSpeak() {
+  speechSynthesis.cancel();
+}
+</script>
