@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>3D 印表機｜有聲操作繪本</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    .book {
+      max-width: 720px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+    }
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 16px;
+      margin-right: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="book">
+  <h1>📘 3D 印表機<br>線上有聲操作繪本</h1>
+
+  <img src="https://via.placeholder.com/700x400?text=3D+Printer+Illustration" alt="3D 印表機插圖">
+
+  <p id="text">
+    今天，小新第一次使用 3D 印表機。
+    他先確認電源是否正常，並檢查列印平台是否乾淨。
+    老師提醒他，在開始列印前，必須先完成基本的安全檢查。
+  </p>
+
+  <button onclick="speak()">🔊 播放語音</button>
+  <button onclick="stopSpeak()">⏹ 停止</button>
+</div>
+
+<script>
+  let utterance;
+
+  function speak() {
+    const text = document.getElementById("text").innerText;
+    utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "zh-TW";
+    speechSynthesis.speak(utterance);
+  }
+
+  function stopSpeak() {
+    speechSynthesis.cancel();
+  }
+</script>
+
+</body>
+</html>
