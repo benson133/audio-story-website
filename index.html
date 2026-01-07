@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>3D 印表機｜線上有聲故事繪本</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background: #f3f3f3;
+      padding: 20px;
+    }
+    .book {
+      max-width: 720px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+    }
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 16px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="book">
+  <h1 id="title">📘 第 1 頁</h1>
+  <img id="image" src="https://picsum.photos/700/400?random=1" alt="插圖">
+  <p id="text"></p>
+  <button onclick="speak()">🔊 播放語音</button>
+  <button onclick="stopSpeak()">⏹ 停止</button>
+  <br><br>
+  <button onclick="prevPage()">⬅ 上一頁</button>
+  <button onclick="nextPage()">➡ 下一頁</button>
+</div>
+
+<script>
+const pages = [
+  {
+    title: "📘 第 1 頁：初見 3D 印表機",
+    text: "小新第一次走進創客教室，看見桌上一台亮晶晶的 3D 印表機。老師告訴他，這台機器可以把電腦裡的設計變成真正的物品。小新充滿好奇，決定仔細觀察按鈕和列印平台的位置。",
+    image: "https://picsum.photos/700/400?random=1"
+  },
+  {
+    title: "📘 第 2 頁：安全檢查",
+    text: "開始操作前，小新戴上護目鏡，檢查列印平台是否乾淨，線材是否順暢。老師提醒他，每一次列印前都要做安全檢查，否則可能會失敗或危險。",
+    image: "https://picsum.photos/700/400?random=2"
+  },
+  {
+    title: "📘 第 3 頁：開始列印",
+    text: "確認設定完成後，小新按下開始鍵。3D 印表機慢慢加熱並開始運作。他專心觀察第一層是否順利完成，因為這會影響整個作品的成功。機器嗡嗡運作，像在唱一首小小的機械歌。",
+    image: "https://picsum.photos/700/400?random=3"
+  },
+  {
+    title: "📘 第 4 頁：小問題與解決",
+    text: "突然，第一層有點翹邊，小新心裡有些緊張。他回想老師教的技巧，輕輕調整平台高度，並清理掉一些微小的粉屑。機器重新開始運作，一切順利。",
+    image: "https://picsum.photos/700/400?random=4"
+  },
+  {
+    title: "📘 第 5 頁：成功完成",
+    text: "經過一小時的努力，作品終於完成！小新拿起印出的模型，高興地笑了。他感謝老師，也學到了觀察、耐心與細心操作的重要性。今天，小新對 3D 印表機有了全新的認識與喜愛。",
+    image: "https://picsum.photos/700/400?random=5"
+  }
+];
+
+let currentPage = 0;
+let utterance;
+
+function renderPage() {
+  document.getElementById("title").innerText = pages[currentPage].title;
+  document.getElementById("text").innerText = pages[currentPage].text;
+  document.getElementById("image").src = pages[currentPage].image;
+}
+
+function nextPage() {
+  if (currentPage < pages.length - 1) {
+    currentPage++;
+    stopSpeak();
+    renderPage();
+  }
+}
+
+function prevPage() {
+  if (currentPage > 0) {
+    currentPage--;
+    stopSpeak();
+    renderPage();
+  }
+}
+
+function speak() {
+  utterance = new SpeechSynthesisUtterance(pages[currentPage].text);
+  utterance.lang = "zh-TW";
+  speechSynthesis.speak(utterance);
+}
+
+function stopSpeak() {
+  speechSynthesis.cancel();
+}
+
+// 初始頁面
+renderPage();
+</script>
+
+</body>
+</html>
